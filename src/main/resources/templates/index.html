@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Точки рассчета</title>
+</head>
+<body>
+
+<div th:each="settlementPoint : ${points}">
+    <a th:href="@{/settlementPoint/{id}(id=${settlementPoint.getId()})}"
+       th:text="${settlementPoint.getclientTin() + ', ' + settlementPoint.getclientName()}">points</a>
+</div>
+
+<br/>
+<hr/>
+
+<a href="/people/new">Зарегистрировать новую точку рассчета</a>
+
+</body>
+</html>
