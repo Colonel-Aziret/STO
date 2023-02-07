@@ -6,15 +6,15 @@
 </head>
 <body>
 
-<div th:each="settlementPoint : ${points}">
-    <a th:href="@{/settlementPoint/{id}(id=${settlementPoint.getId()})}"
-       th:text="${settlementPoint.getclientTin() + ', ' + settlementPoint.getclientName()}">points</a>
+<div th:each="settlementPoint : ${settlementPoint}">
+    <a th:href="@{/settlementPoint/{pointId}(pointId=${settlementPoint.getPointId()})}"
+       th:text="${settlementPoint.getclientTin() + ', ' + settlementPoint.getclientName()}">Settlement Points</a>
 </div>
 
 <br/>
 <hr/>
 
-<a href="/people/new">Зарегистрировать новую точку рассчета</a>
+<a href="/api/point/add">Зарегистрировать новую точку рассчета</a>
 
 </body>
 </html>

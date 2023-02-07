@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Новая точка рассчета</title>
+</head>
+<body>
+
+<form th:action="@{/api/point/save}" th:method="post" th:object="${settlementPoint}">
+    <label for="clientTin">ClientTin: </label>
+    <input type="text" th:field="*{clientTin}" id="clientTin"/>
+<!--    <div style="color:red" th:if="${#fields.hasErrors('clientTin')}" th:errors="*{clientTin}">ClientTin Error</div>-->
+    <br/>
+    <label for="clientName">ClientName: </label>
+    <input type="text" th:field="*{clientName}" id="clientName"/>
+<!--    <div style="color:red" th:if="${#fields.hasErrors('clientName')}" th:errors="*{clientName}">ClientName Error</div>-->
+    <br/>
+    <label for="activity">Activity: </label>
+    <input type="text" th:field="*{activity}" id="activity"/>
+<!--    <div style="color:red" th:if="${#fields.hasErrors('activity')}" th:errors="*{activity}">Activity Error</div>-->
+    <br/>
+    <label for="objectType">ObjectType: </label>
+    <input type="text" th:field="*{objectType}" id="objectType"/>
+<!--    <div style="color:red" th:if="${#fields.hasErrors('objectType')}" th:errors="*{objectType}">ObjectType Error</div>-->
+    <br/>
+    <label for="pointType">PointType: </label>
+    <input type="text" th:field="*{pointType}" id="pointType"/>
+<!--    <div style="color:red" th:if="${#fields.hasErrors('pointType')}" th:errors="*{pointType}">PointType Error</div>-->
+    <br/>
+    <label for="pointFormat">PointFormat: </label>
+    <input type="text" th:field="*{pointFormat}" id="pointFormat"/>
+<!--    <div style="color:red" th:if="${#fields.hasErrors('pointFormat')}" th:errors="*{pointFormat}">PointFormat Error</div>-->
+    <br/>
+    <label for="pointAddress">PointAddress: </label>
+    <input type="text" th:field="*{pointAddress}" id="pointAddress"/>
+<!--    <div style="color:red" th:if="${#fields.hasErrors('pointAddress')}" th:errors="*{pointAddress}">PointAddress Error</div>-->
+    <br/>
+    <label for="equipmentType">EquipmentType: </label>
+    <input type="text" th:field="*{equipmentType}" id="equipmentType"/>
+<!--    <div style="color:red" th:if="${#fields.hasErrors('equipmentType')}" th:errors="*{equipmentType}">EquipmentType Error-->
+    </div>
+    <br/>
+    <label for="equipmentId">EquipmentId: </label>
+    <input type="text" th:field="*{equipmentId}" id="equipmentId"/>
+<!--    <div style="color:red" th:if="${#fields.hasErrors('equipmentId')}" th:errors="*{equipmentId}">EquipmentId Error</div>-->
+    <br/>
+    <input type="submit" value="Create!"/>
+</form>
+</body>
+</html>

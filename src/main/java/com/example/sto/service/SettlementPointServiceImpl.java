@@ -1,6 +1,5 @@
 package com.example.sto.service;
 
-import com.example.sto.model.PointAddress;
 import com.example.sto.model.SettlementPoint;
 import com.example.sto.repository.SettlementPointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,27 +21,19 @@ public class SettlementPointServiceImpl implements SettlementPointService {
     }
 
     @Override
-    public void save(SettlementPoint settlementPoint) {
-        SettlementPoint sp = new SettlementPoint();
-        PointAddress pointAddress = new PointAddress();
-        settlementPoint.setClientTin(settlementPoint.getClientTin());
-        settlementPoint.setClientName(settlementPoint.getClientName());
-        settlementPoint.setActivity(settlementPoint.getActivity());
-        settlementPoint.setObjectType(settlementPoint.getObjectType());
-        settlementPoint.setPointType(settlementPoint.getPointType());
-        settlementPoint.setPointFormat(settlementPoint.getPointFormat());
-        settlementPoint.setPointAddress(settlementPoint.getPointAddress());
-        pointAddress.setPostalCode(pointAddress.getPostalCode());
-        pointAddress.setCountry(pointAddress.getCountry());
-        pointAddress.setAdministrativeArea(pointAddress.getAdministrativeArea());
-        pointAddress.setRegion(pointAddress.getRegion());
-        pointAddress.setLocality(pointAddress.getLocality());
-        pointAddress.setRoute(pointAddress.getRoute());
-        pointAddress.setStreetNumber(pointAddress.getStreetNumber());
-        pointAddress.setLocation(pointAddress.getLocation());
-        settlementPoint.setEquipmentType(settlementPoint.getEquipmentType());
-        settlementPoint.setEquipmentId(settlementPoint.getEquipmentId());
-        settlementPointRepository.save(settlementPoint);
+    public SettlementPoint save(SettlementPoint settlementPoint) {
+        return null;
+    }
+
+    @Override
+    public SettlementPoint save(SettlementPoint settlementPoint, UUID pointID) {
+        settlementPoint.setPointId(UUID.randomUUID());
+        return settlementPointRepository.save(settlementPoint);
+    }
+
+    public List<String> allSettlementPoint() {
+        List<SettlementPoint> pointId = settlementPointRepository.findAll();
+        return allSettlementPoint();
     }
 
     @Override
@@ -51,12 +42,18 @@ public class SettlementPointServiceImpl implements SettlementPointService {
     }
 
     @Override
-    public void delete(UUID id) {
-        settlementPointRepository.deleteById(id);
+    public void delete(UUID pointId) {
+        settlementPointRepository.deleteById(pointId);
+    }
+
+    @Override
+    public void deleteById(UUID pointId) {
+        settlementPointRepository.deleteById(pointId);
     }
 
     @Override
     public List<SettlementPoint> getAll() {
         return settlementPointRepository.findAll();
     }
+
 }
