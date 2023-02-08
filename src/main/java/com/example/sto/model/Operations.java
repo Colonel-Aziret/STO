@@ -3,6 +3,7 @@ package com.example.sto.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
 
@@ -12,7 +13,8 @@ import java.util.Date;
 @Setter
 public class Operations {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "operations_id")
+    @GenericGenerator(name = "operations_id", strategy = "operations_id")
     private Integer id;
 
     @ManyToOne(fetch = FetchType.EAGER)

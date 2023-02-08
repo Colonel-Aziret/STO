@@ -3,6 +3,7 @@ package com.example.sto.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.UUID;
 
@@ -13,9 +14,9 @@ import java.util.UUID;
 @Setter
 public class SettlementPoint {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "point_id_seq")
-    @SequenceGenerator(name = "point_id_seq", sequenceName = "point_id_seq", allocationSize = 1)
-    private UUID pointId;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private String pointId;
 
     @Column(name = "client_tin")
     private String clientTin;
@@ -24,10 +25,10 @@ public class SettlementPoint {
     private String clientName;
 
     @Column(name = "activity")
-    private Integer activity;
+    private String activity;
 
     @Column(name = "object_type")
-    private Integer objectType;
+    private String objectType;
 
     @Column(name = "point_type")
     private String pointType;
@@ -35,8 +36,8 @@ public class SettlementPoint {
     @Column(name = "point_format")
     private String pointFormat;
 
-    @Column(name = "point_address")
-    private String pointAddress;
+//    @Column(name = "point_address")
+//    private String pointAddress;
 
     @Column(name = "equipment_type")
     private String equipmentType;

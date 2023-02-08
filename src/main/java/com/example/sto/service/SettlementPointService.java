@@ -7,18 +7,19 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface SettlementPointService {
-    Optional<SettlementPoint> getById(UUID id);
+    Optional<SettlementPoint> getById(String id);
+
     //add
     SettlementPoint save(SettlementPoint settlementPoint);
 
-    SettlementPoint save(SettlementPoint settlementPoint, UUID pointID);
-
     //update
     void update(SettlementPoint settlementPoint);
+
     //delete
-    void delete(UUID id);
+    void delete(String id);
+
     //list
     List<SettlementPoint> getAll();
 
-    void deleteById(UUID pointId);
+    void deleteById(String pointId);
 }

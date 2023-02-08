@@ -4,29 +4,28 @@ import com.example.sto.model.PointAddress;
 import com.example.sto.model.SettlementPoint;
 import com.example.sto.repository.PointAddressRepository;
 import com.example.sto.repository.SettlementPointRepository;
+import com.example.sto.service.PointAddressService;
 import com.example.sto.service.SettlementPointService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.util.List;
-import java.util.UUID;
 
-@Controller
+@RestController
 @RequestMapping("/api/point")
 public class SettlementPointController {
     @Autowired
     SettlementPointRepository settlementPointRepository;
     @Autowired
     SettlementPointService settlementPointService;
+
     @Autowired
-    private PointAddressRepository pointAddressRepository;
+    PointAddressRepository pointAddressRepository;
+
+    @Autowired
+    PointAddressService pointAddressService;
 
 
     // Регистрация точки расчета
@@ -38,9 +37,9 @@ public class SettlementPointController {
 //    }
 
     @PostMapping(value = "/add")
-    public SettlementPoint saveSettlementPoint(@Validated @RequestBody SettlementPoint settlementPoint) {
-        settlementPoint.setPointId(UUID.randomUUID());
-        return settlementPointRepository.save(settlementPoint);
+    public SettlementPoint saveSettlementPoint(@RequestBody SettlementPoint settlementPoint, PointAddress pointAddress) {
+        pointAddressService.save(pointAddress);
+        return settlementPointService.save(settlementPoint);
     }
 
 
@@ -55,27 +54,26 @@ public class SettlementPointController {
 //        return new ResponseEntity<SettlementPoint>(settlementPoint, headers, HttpStatus.CREATED);
 //    }
 
-    @PatchMapping("/update/{id}")
-    public ResponseEntity<SettlementPoint> update(@PathVariable("pointId") UUID pointId,
+    @PatchMapping("/update/{pointId}")
+    public ResponseEntity<SettlementPoint> update(@PathVariable("pointId") String pointId,
                                                   @RequestBody SettlementPoint settlementPointDetails, PointAddress pointAddress) {
         SettlementPoint settlementPoint = settlementPointRepository.findById(pointId).orElseThrow(() -> new ResourceNotFoundException("SettlementPoint not found for this id :: " + pointId));
         settlementPoint.setPointId(settlementPointDetails.getPointId());
         settlementPoint.setActivity(settlementPointDetails.getActivity());
         settlementPoint.setObjectType(settlementPointDetails.getObjectType());
-        settlementPoint.setPointAddress(settlementPointDetails.getPointAddress());
-        settlementPointRepository.save(settlementPoint);
+        settlementPointService.save(settlementPoint);
         return ResponseEntity.ok().body(settlementPoint);
     }
 
     // Снятие с регистрации точки расчета
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<UUID> deleteSettlementPoint(@PathVariable("id") UUID pointId) {
+    @DeleteMapping("/delete/{pointId}")
+    public ResponseEntity<String> deleteSettlementPoint(@PathVariable("pointId") String pointId) {
         this.settlementPointRepository.deleteById(pointId);
         return ResponseEntity.ok().body(pointId);
     }
 
-    @GetMapping("/employees/{id}")
-    public ResponseEntity<SettlementPoint> getAllSettlementPointsByID(@PathVariable(value = "pointId") UUID pointId) throws ResourceNotFoundException {
+    @GetMapping("/list/{pointId}")
+    public ResponseEntity<SettlementPoint> getAllSettlementPointsByID(@PathVariable(value = "pointId") String pointId) throws ResourceNotFoundException {
         SettlementPoint settlementPoint = settlementPointRepository.findById(pointId).orElseThrow(() -> new ResourceNotFoundException("SettlementPoint not found for this id :: " + pointId));
         return ResponseEntity.ok().body(settlementPoint);
     }

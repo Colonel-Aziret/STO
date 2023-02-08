@@ -16,20 +16,17 @@ public class SettlementPointServiceImpl implements SettlementPointService {
     SettlementPointRepository settlementPointRepository;
 
     @Override
-    public Optional<SettlementPoint> getById(UUID id) {
+    public Optional<SettlementPoint> getById(String id) {
         return settlementPointRepository.findById(id);
     }
 
-    @Override
-    public SettlementPoint save(SettlementPoint settlementPoint) {
-        return null;
-    }
 
     @Override
-    public SettlementPoint save(SettlementPoint settlementPoint, UUID pointID) {
-        settlementPoint.setPointId(UUID.randomUUID());
+    public SettlementPoint save(SettlementPoint settlementPoint) {
         return settlementPointRepository.save(settlementPoint);
     }
+
+
 
     public List<String> allSettlementPoint() {
         List<SettlementPoint> pointId = settlementPointRepository.findAll();
@@ -42,12 +39,12 @@ public class SettlementPointServiceImpl implements SettlementPointService {
     }
 
     @Override
-    public void delete(UUID pointId) {
+    public void delete(String pointId) {
         settlementPointRepository.deleteById(pointId);
     }
 
     @Override
-    public void deleteById(UUID pointId) {
+    public void deleteById(String pointId) {
         settlementPointRepository.deleteById(pointId);
     }
 
@@ -55,5 +52,7 @@ public class SettlementPointServiceImpl implements SettlementPointService {
     public List<SettlementPoint> getAll() {
         return settlementPointRepository.findAll();
     }
+
+
 
 }

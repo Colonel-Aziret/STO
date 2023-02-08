@@ -3,6 +3,7 @@ package com.example.sto.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "point_address")
@@ -10,7 +11,8 @@ import lombok.Setter;
 @Setter
 public class PointAddress {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "operations_id")
+    @GenericGenerator(name = "operations_id", strategy = "operations_id")
     private Integer id;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -25,9 +27,6 @@ public class PointAddress {
 
     @Column(name = "administrative_area")
     private String administrativeArea;
-
-    @Column(name = "region")
-    private String region;
 
     @Column(name = "locality")
     private String locality;

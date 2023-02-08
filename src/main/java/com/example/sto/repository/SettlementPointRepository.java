@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface SettlementPointRepository extends JpaRepository<SettlementPoint, UUID> {
+public interface SettlementPointRepository extends JpaRepository<SettlementPoint, String> {
 
 }
