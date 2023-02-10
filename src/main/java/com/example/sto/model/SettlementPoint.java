@@ -15,7 +15,7 @@ import java.util.UUID;
 public class SettlementPoint {
     @Id
     @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @GenericGenerator(name = "uuid", strategy = "uuid")
     private String pointId;
 
     @Column(name = "client_tin")

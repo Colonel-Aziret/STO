@@ -15,8 +15,7 @@ public class PointAddressServiceImpl implements PointAddressService {
 
     @Override
     public PointAddress save(PointAddress pointAddress) {
-        pointAddressRepository.save(pointAddress);
-        return pointAddress;
+        return pointAddressRepository.save(pointAddress);
     }
 
     @Override

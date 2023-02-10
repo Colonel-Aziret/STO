@@ -3,23 +3,22 @@ package com.example.sto.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "operations")
 @Getter
 @Setter
-public class Operations {
+public class Operation {
     @Id
-    @GeneratedValue(generator = "operations_id")
-    @GenericGenerator(name = "operations_id", strategy = "operations_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "operation_id")
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "point_id")
-    private SettlementPoint pointId;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "uuid")
+    private SettlementPoint settlementPoint;
 
     @Column(name = "date")
     private Date date;
