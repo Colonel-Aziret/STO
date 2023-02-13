@@ -55,7 +55,7 @@ public class SettlementPointController {
 //    }
 
     @PatchMapping("/update/{pointId}")
-    public ResponseEntity<SettlementPoint> update(@PathVariable("pointId") String pointId,
+    public ResponseEntity<SettlementPoint> update(@PathVariable(value = "pointId") String pointId,
                                                   @RequestBody SettlementPoint settlementPointDetails, PointAddress pointAddress) {
         SettlementPoint settlementPoint = settlementPointRepository.findById(pointId).orElseThrow(() -> new ResourceNotFoundException("SettlementPoint not found for this id :: " + pointId));
         settlementPoint.setPointId(settlementPointDetails.getPointId());
@@ -67,7 +67,7 @@ public class SettlementPointController {
 
     // Снятие с регистрации точки расчета
     @DeleteMapping("/delete/{pointId}")
-    public ResponseEntity<String> deleteSettlementPoint(@PathVariable("pointId") String pointId) {
+    public ResponseEntity<String> deleteSettlementPoint(@PathVariable(value = "pointId") String pointId) {
         this.settlementPointRepository.deleteById(pointId);
         return ResponseEntity.ok().body(pointId);
     }

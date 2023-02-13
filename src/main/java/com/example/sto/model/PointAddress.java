@@ -16,7 +16,6 @@ public class PointAddress {
     private Integer id;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "uuid")
     private SettlementPoint settlementPoint;
 
     @Column(name = "postal_code")

@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-//@RestController
-//public class PointAddressController {
-//    @Autowired
-//    PointAddressRepository pointAddressRepository;
-//
-//    @Autowired
-//    PointAddressService pointAddressService;
-//
-//    @PostMapping(value = "/add")
-//    public PointAddress savePointAddress(@RequestBody PointAddress pointAddress) {
-//        return pointAddressService.save(pointAddress);
-//    }
-//}
+@RestController
+public class PointAddressController {
+    @Autowired
+    PointAddressRepository pointAddressRepository;
+
+    @Autowired
+    PointAddressService pointAddressService;
+
+    @PostMapping(value = "/add")
+    public PointAddress savePointAddress(@RequestBody PointAddress pointAddress) {
+        return pointAddressService.save(pointAddress);
+    }
+}
