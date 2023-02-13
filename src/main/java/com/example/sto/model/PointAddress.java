@@ -15,8 +15,6 @@ public class PointAddress {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "point_address_id")
     private Integer id;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    private SettlementPoint settlementPoint;
 
     @Column(name = "postal_code")
     private Integer postalCode;

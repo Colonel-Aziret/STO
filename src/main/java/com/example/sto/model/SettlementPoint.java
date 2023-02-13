@@ -45,4 +45,9 @@ public class SettlementPoint {
     @Column(name = "equipment_id")
     private String equipmentId;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private PointAddress pointAddress;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Operation operation;
 }

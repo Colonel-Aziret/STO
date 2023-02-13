@@ -37,8 +37,7 @@ public class SettlementPointController {
 //    }
 
     @PostMapping(value = "/add")
-    public SettlementPoint saveSettlementPoint(@RequestBody SettlementPoint settlementPoint, PointAddress pointAddress) {
-        pointAddressService.save(pointAddress);
+    public SettlementPoint saveSettlementPoint(@RequestBody SettlementPoint settlementPoint) {
         return settlementPointService.save(settlementPoint);
     }
 
@@ -56,11 +55,24 @@ public class SettlementPointController {
 
     @PatchMapping("/update/{pointId}")
     public ResponseEntity<SettlementPoint> update(@PathVariable(value = "pointId") String pointId,
-                                                  @RequestBody SettlementPoint settlementPointDetails, PointAddress pointAddress) {
+                                                  @RequestBody SettlementPoint settlementPointDetails, PointAddress pointAddress) throws ResourceNotFoundException {
         SettlementPoint settlementPoint = settlementPointRepository.findById(pointId).orElseThrow(() -> new ResourceNotFoundException("SettlementPoint not found for this id :: " + pointId));
         settlementPoint.setPointId(settlementPointDetails.getPointId());
+        settlementPoint.setClientTin(settlementPointDetails.getClientTin());
+        settlementPoint.setClientName(settlementPoint.getClientName());
         settlementPoint.setActivity(settlementPointDetails.getActivity());
         settlementPoint.setObjectType(settlementPointDetails.getObjectType());
+        settlementPoint.setPointType(settlementPoint.getPointType());
+        settlementPoint.setPointFormat(settlementPoint.getPointFormat());
+        settlementPoint.setEquipmentType(settlementPoint.getEquipmentType());
+        settlementPoint.setEquipmentId(settlementPoint.getEquipmentId());
+        pointAddress.setPostalCode(pointAddress.getPostalCode());
+        pointAddress.setCountry(pointAddress.getCountry());
+        pointAddress.setAdministrativeArea(pointAddress.getAdministrativeArea());
+        pointAddress.setLocality(pointAddress.getLocality());
+        pointAddress.setRoute(pointAddress.getRoute());
+        pointAddress.setStreetNumber(pointAddress.getStreetNumber());
+        pointAddress.setLocation(pointAddress.getLocation());
         settlementPointService.save(settlementPoint);
         return ResponseEntity.ok().body(settlementPoint);
     }
