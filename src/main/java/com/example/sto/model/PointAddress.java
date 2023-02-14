@@ -15,7 +15,6 @@ public class PointAddress {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "point_address_id")
     private Integer id;
 
-
     @Column(name = "postal_code")
     private Integer postalCode;
 
@@ -24,9 +23,6 @@ public class PointAddress {
 
     @Column(name = "administrative_area")
     private String administrativeArea;
-
-//    @Column(name = "region")
-//    private String region;
 
     @Column(name = "locality")
     private String locality;

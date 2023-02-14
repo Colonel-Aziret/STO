@@ -36,9 +36,6 @@ public class SettlementPoint {
     @Column(name = "point_format")
     private String pointFormat;
 
-//    @Column(name = "point_address")
-//    private String pointAddress;
-
     @Column(name = "equipment_type")
     private String equipmentType;
 
@@ -50,4 +47,5 @@ public class SettlementPoint {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Operation operation;
+
 }

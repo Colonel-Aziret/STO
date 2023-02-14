@@ -21,7 +21,7 @@ public class OperationController {
     OperationService operationService;
 
     @PostMapping(value = "/operations")
-    public List<Operation> save(@RequestBody Operation operation) {
+    public Operation save(@RequestBody Operation operation) {
         return operationService.save(operation);
     }
 }
