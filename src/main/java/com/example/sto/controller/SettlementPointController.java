@@ -60,7 +60,6 @@ public class SettlementPointController {
     public ResponseEntity<SettlementPoint> update(@PathVariable(value = "pointId") String pointId,
                                                   @RequestBody SettlementPoint settlementPointDetails, PointAddress pointAddressDetails) throws ResourceNotFoundException {
         SettlementPoint settlementPoint = settlementPointRepository.findById(pointId).orElseThrow(() -> new ResourceNotFoundException("SettlementPoint not found for this id :: " + pointId));
-        settlementPoint.setPointId(settlementPointDetails.getPointId());
         settlementPoint.setClientTin(settlementPointDetails.getClientTin());
         settlementPoint.setClientName(settlementPointDetails.getClientName());
         settlementPoint.setActivity(settlementPointDetails.getActivity());
@@ -69,16 +68,25 @@ public class SettlementPointController {
         settlementPoint.setPointFormat(settlementPointDetails.getPointFormat());
         settlementPoint.setEquipmentType(settlementPointDetails.getEquipmentType());
         settlementPoint.setEquipmentId(settlementPointDetails.getEquipmentId());
-        PointAddress pointAddress = new PointAddress();
-        pointAddress.setPostalCode(pointAddressDetails.getPostalCode());
-        pointAddress.setCountry(pointAddressDetails.getCountry());
-        pointAddress.setAdministrativeArea(pointAddressDetails.getAdministrativeArea());
-        pointAddress.setLocality(pointAddressDetails.getLocality());
-        pointAddress.setRoute(pointAddressDetails.getRoute());
-        pointAddress.setStreetNumber(pointAddressDetails.getStreetNumber());
-        pointAddress.setLocation(pointAddressDetails.getLocation());
-        Operation operation = new Operation();
-        operation.setDate(new Date());
+//        settlementPoint.setPointId(settlementPointDetails.getPointId());
+//        settlementPoint.setClientTin(settlementPointDetails.getClientTin());
+//        settlementPoint.setClientName(settlementPointDetails.getClientName());
+//        settlementPoint.setActivity(settlementPointDetails.getActivity());
+//        settlementPoint.setObjectType(settlementPointDetails.getObjectType());
+//        settlementPoint.setPointType(settlementPointDetails.getPointType());
+//        settlementPoint.setPointFormat(settlementPointDetails.getPointFormat());
+//        settlementPoint.setEquipmentType(settlementPointDetails.getEquipmentType());
+//        settlementPoint.setEquipmentId(settlementPointDetails.getEquipmentId());
+//        PointAddress pointAddress = new PointAddress();
+//        pointAddress.setPostalCode(pointAddressDetails.getPostalCode());
+//        pointAddress.setCountry(pointAddressDetails.getCountry());
+//        pointAddress.setAdministrativeArea(pointAddressDetails.getAdministrativeArea());
+//        pointAddress.setLocality(pointAddressDetails.getLocality());
+//        pointAddress.setRoute(pointAddressDetails.getRoute());
+//        pointAddress.setStreetNumber(pointAddressDetails.getStreetNumber());
+//        pointAddress.setLocation(pointAddressDetails.getLocation());
+//        Operation operation = new Operation();
+//        operation.setDate(new Date());
         settlementPointService.save(settlementPoint);
         return ResponseEntity.ok().body(settlementPoint);
     }
