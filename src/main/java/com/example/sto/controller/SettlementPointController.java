@@ -3,8 +3,10 @@ package com.example.sto.controller;
 import com.example.sto.model.Operation;
 import com.example.sto.model.PointAddress;
 import com.example.sto.model.SettlementPoint;
+import com.example.sto.repository.OperationRepository;
 import com.example.sto.repository.PointAddressRepository;
 import com.example.sto.repository.SettlementPointRepository;
+import com.example.sto.service.OperationService;
 import com.example.sto.service.PointAddressService;
 import com.example.sto.service.SettlementPointService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,10 @@ public class SettlementPointController {
 
     @Autowired
     PointAddressService pointAddressService;
+    @Autowired
+    private OperationRepository operationRepository;
+    @Autowired
+    OperationService operationService;
 
 
     // Регистрация точки расчета
@@ -68,6 +74,16 @@ public class SettlementPointController {
         settlementPoint.setPointFormat(settlementPointDetails.getPointFormat());
         settlementPoint.setEquipmentType(settlementPointDetails.getEquipmentType());
         settlementPoint.setEquipmentId(settlementPointDetails.getEquipmentId());
+        PointAddress pointAddress = new PointAddress();
+        pointAddress.setPostalCode(pointAddressDetails.getPostalCode());
+        pointAddress.setCountry(pointAddressDetails.getCountry());
+        pointAddress.setAdministrativeArea(pointAddressDetails.getAdministrativeArea());
+        pointAddress.setLocality(pointAddressDetails.getLocality());
+        pointAddress.setRoute(pointAddressDetails.getRoute());
+        pointAddress.setStreetNumber(pointAddressDetails.getStreetNumber());
+        pointAddress.setLocation(pointAddressDetails.getLocation());
+        Operation operation = new Operation();
+        operation.setDate(new Date());
 //        settlementPoint.setPointId(settlementPointDetails.getPointId());
 //        settlementPoint.setClientTin(settlementPointDetails.getClientTin());
 //        settlementPoint.setClientName(settlementPointDetails.getClientName());
@@ -87,6 +103,8 @@ public class SettlementPointController {
 //        pointAddress.setLocation(pointAddressDetails.getLocation());
 //        Operation operation = new Operation();
 //        operation.setDate(new Date());
+        operationRepository.save(operation);
+        pointAddressService.save(pointAddress);
         settlementPointService.save(settlementPoint);
         return ResponseEntity.ok().body(settlementPoint);
     }
