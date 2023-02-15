@@ -1,5 +1,6 @@
 package com.example.sto.controller;
 
+import com.example.sto.model.Operation;
 import com.example.sto.model.PointAddress;
 import com.example.sto.model.SettlementPoint;
 import com.example.sto.repository.PointAddressRepository;
@@ -11,6 +12,7 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -37,7 +39,8 @@ public class SettlementPointController {
 //    }
 
     @PostMapping(value = "/add")
-    public SettlementPoint saveSettlementPoint(@RequestBody SettlementPoint settlementPoint) {
+    public SettlementPoint saveSettlementPoint(@RequestBody SettlementPoint settlementPoint, Operation operation) {
+        operation.setDate(new Date());
         return settlementPointService.save(settlementPoint);
     }
 
@@ -53,26 +56,29 @@ public class SettlementPointController {
 //        return new ResponseEntity<SettlementPoint>(settlementPoint, headers, HttpStatus.CREATED);
 //    }
 
-    @PatchMapping("/update/{pointId}")
+    @PutMapping("/update/{pointId}")
     public ResponseEntity<SettlementPoint> update(@PathVariable(value = "pointId") String pointId,
-                                                  @RequestBody SettlementPoint settlementPointDetails, PointAddress pointAddress) throws ResourceNotFoundException {
+                                                  @RequestBody SettlementPoint settlementPointDetails, PointAddress pointAddressDetails) throws ResourceNotFoundException {
         SettlementPoint settlementPoint = settlementPointRepository.findById(pointId).orElseThrow(() -> new ResourceNotFoundException("SettlementPoint not found for this id :: " + pointId));
         settlementPoint.setPointId(settlementPointDetails.getPointId());
         settlementPoint.setClientTin(settlementPointDetails.getClientTin());
-        settlementPoint.setClientName(settlementPoint.getClientName());
+        settlementPoint.setClientName(settlementPointDetails.getClientName());
         settlementPoint.setActivity(settlementPointDetails.getActivity());
         settlementPoint.setObjectType(settlementPointDetails.getObjectType());
-        settlementPoint.setPointType(settlementPoint.getPointType());
-        settlementPoint.setPointFormat(settlementPoint.getPointFormat());
-        settlementPoint.setEquipmentType(settlementPoint.getEquipmentType());
-        settlementPoint.setEquipmentId(settlementPoint.getEquipmentId());
-        pointAddress.setPostalCode(pointAddress.getPostalCode());
-        pointAddress.setCountry(pointAddress.getCountry());
-        pointAddress.setAdministrativeArea(pointAddress.getAdministrativeArea());
-        pointAddress.setLocality(pointAddress.getLocality());
-        pointAddress.setRoute(pointAddress.getRoute());
-        pointAddress.setStreetNumber(pointAddress.getStreetNumber());
-        pointAddress.setLocation(pointAddress.getLocation());
+        settlementPoint.setPointType(settlementPointDetails.getPointType());
+        settlementPoint.setPointFormat(settlementPointDetails.getPointFormat());
+        settlementPoint.setEquipmentType(settlementPointDetails.getEquipmentType());
+        settlementPoint.setEquipmentId(settlementPointDetails.getEquipmentId());
+        PointAddress pointAddress = new PointAddress();
+        pointAddress.setPostalCode(pointAddressDetails.getPostalCode());
+        pointAddress.setCountry(pointAddressDetails.getCountry());
+        pointAddress.setAdministrativeArea(pointAddressDetails.getAdministrativeArea());
+        pointAddress.setLocality(pointAddressDetails.getLocality());
+        pointAddress.setRoute(pointAddressDetails.getRoute());
+        pointAddress.setStreetNumber(pointAddressDetails.getStreetNumber());
+        pointAddress.setLocation(pointAddressDetails.getLocation());
+        Operation operation = new Operation();
+        operation.setDate(new Date());
         settlementPointService.save(settlementPoint);
         return ResponseEntity.ok().body(settlementPoint);
     }

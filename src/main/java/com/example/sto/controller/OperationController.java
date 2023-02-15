@@ -1,14 +1,12 @@
 package com.example.sto.controller;
 
 import com.example.sto.model.Operation;
-import com.example.sto.model.SettlementPoint;
 import com.example.sto.repository.OperationRepository;
 import com.example.sto.service.OperationService;
-import netscape.javascript.JSObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/api")
@@ -22,6 +20,7 @@ public class OperationController {
 
     @PostMapping(value = "/operations")
     public Operation save(@RequestBody Operation operation) {
+        operation.setDate(new Date());
         return operationService.save(operation);
     }
 }

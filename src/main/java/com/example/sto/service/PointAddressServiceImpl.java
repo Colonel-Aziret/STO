@@ -1,10 +1,12 @@
 package com.example.sto.service;
 
+import com.example.sto.model.Operation;
 import com.example.sto.model.PointAddress;
 import com.example.sto.repository.PointAddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -15,6 +17,8 @@ public class PointAddressServiceImpl implements PointAddressService {
 
     @Override
     public PointAddress save(PointAddress pointAddress) {
+        Operation operation = new Operation();
+        operation.setDate(new Date());
         return pointAddressRepository.save(pointAddress);
     }
 
