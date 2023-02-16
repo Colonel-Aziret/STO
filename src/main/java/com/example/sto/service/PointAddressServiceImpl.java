@@ -2,6 +2,7 @@ package com.example.sto.service;
 
 import com.example.sto.model.Operation;
 import com.example.sto.model.PointAddress;
+import com.example.sto.repository.OperationRepository;
 import com.example.sto.repository.PointAddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,11 +15,14 @@ public class PointAddressServiceImpl implements PointAddressService {
 
     @Autowired
     PointAddressRepository pointAddressRepository;
+    @Autowired
+    private OperationRepository operationRepository;
 
     @Override
     public PointAddress save(PointAddress pointAddress) {
         Operation operation = new Operation();
         operation.setDate(new Date());
+        operationRepository.save(operation);
         return pointAddressRepository.save(pointAddress);
     }
 

@@ -30,6 +30,7 @@ public class SettlementPointServiceImpl implements SettlementPointService {
         Operation operation = new Operation();
         operation.setDate(new Date());
 //        operations.setDate(operations.getDate(new Date()));
+        operationRepository.save(operation);
         return settlementPointRepository.save(settlementPoint);
     }
 
