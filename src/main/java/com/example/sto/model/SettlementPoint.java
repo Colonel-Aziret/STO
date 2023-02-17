@@ -46,4 +46,5 @@ public class SettlementPoint {
     @OneToOne(cascade = CascadeType.ALL)
     private Operation operation;
 
+
 }
