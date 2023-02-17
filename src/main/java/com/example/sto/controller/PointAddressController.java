@@ -21,8 +21,6 @@ public class PointAddressController {
 
     @PostMapping(value = "/add")
     public PointAddress savePointAddress(@RequestBody PointAddress pointAddress) {
-        Operation operation = new Operation();
-        operation.setDate(new Date());
         return pointAddressService.save(pointAddress);
     }
 }

@@ -27,10 +27,6 @@ public class SettlementPointServiceImpl implements SettlementPointService {
 
     @Override
     public SettlementPoint save(SettlementPoint settlementPoint) {
-        Operation operation = new Operation();
-        operation.setDate(new Date());
-//        operations.setDate(operations.getDate(new Date()));
-        operationRepository.save(operation);
         return settlementPointRepository.save(settlementPoint);
     }
 

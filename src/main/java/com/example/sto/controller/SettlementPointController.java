@@ -45,8 +45,8 @@ public class SettlementPointController {
 //    }
 
     @PostMapping(value = "/add")
-    public SettlementPoint saveSettlementPoint(@RequestBody SettlementPoint settlementPoint, Operation operation) {
-        operation.setDate(new Date());
+    public SettlementPoint saveSettlementPoint(@RequestBody SettlementPoint settlementPoint) {
+        settlementPoint.getOperation().setDate(new Date());
         return settlementPointService.save(settlementPoint);
     }
 
@@ -64,7 +64,7 @@ public class SettlementPointController {
 
     @PutMapping("/update/{pointId}")
     public ResponseEntity<SettlementPoint> update(@PathVariable(value = "pointId") String pointId,
-                                                  @RequestBody SettlementPoint settlementPointDetails, PointAddress pointAddressDetails) throws ResourceNotFoundException {
+                                                  @RequestBody SettlementPoint settlementPointDetails, PointAddress pointAddressDetails, Operation operation) throws ResourceNotFoundException {
         SettlementPoint settlementPoint = settlementPointRepository.findById(pointId).orElseThrow(() -> new ResourceNotFoundException("SettlementPoint not found for this id :: " + pointId));
         settlementPoint.setClientTin(settlementPointDetails.getClientTin());
         settlementPoint.setClientName(settlementPointDetails.getClientName());
@@ -82,8 +82,6 @@ public class SettlementPointController {
         pointAddress.setRoute(pointAddressDetails.getRoute());
         pointAddress.setStreetNumber(pointAddressDetails.getStreetNumber());
         pointAddress.setLocation(pointAddressDetails.getLocation());
-        Operation operation = new Operation();
-        operation.setDate(new Date());
 //        settlementPoint.setPointId(settlementPointDetails.getPointId());
 //        settlementPoint.setClientTin(settlementPointDetails.getClientTin());
 //        settlementPoint.setClientName(settlementPointDetails.getClientName());
@@ -103,7 +101,7 @@ public class SettlementPointController {
 //        pointAddress.setLocation(pointAddressDetails.getLocation());
 //        Operation operation = new Operation();
 //        operation.setDate(new Date());
-        operationRepository.save(operation);
+        operationService.save(operation);
         pointAddressService.save(pointAddress);
         settlementPointService.save(settlementPoint);
         return ResponseEntity.ok().body(settlementPoint);

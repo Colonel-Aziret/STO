@@ -20,7 +20,6 @@ public class OperationController {
 
     @PostMapping(value = "/operations")
     public Operation save(@RequestBody Operation operation) {
-        operation.setDate(new Date());
         return operationService.save(operation);
     }
 }

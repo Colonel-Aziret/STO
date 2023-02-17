@@ -20,9 +20,6 @@ public class PointAddressServiceImpl implements PointAddressService {
 
     @Override
     public PointAddress save(PointAddress pointAddress) {
-        Operation operation = new Operation();
-        operation.setDate(new Date());
-        operationRepository.save(operation);
         return pointAddressRepository.save(pointAddress);
     }
 
