@@ -21,6 +21,7 @@ public class OperationServiceImpl implements OperationService {
 
     @Override
     public Operation save(Operation operation) {
+        operation.setDate(new Date());
         return operationRepository.save(operation);
     }
 
