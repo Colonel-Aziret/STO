@@ -3,6 +3,7 @@ package com.example.sto.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
 
@@ -14,6 +15,11 @@ public class Operation {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "operation_id")
     private Integer id;
+
+//    @Id
+//    @GeneratedValue(generator = "uuid")
+//    @GenericGenerator(name = "uuid", strategy = "uuid2")
+//    private String pointId;
 
     @Column(name = "date")
     private Date date;
@@ -42,4 +48,7 @@ public class Operation {
     @Column(name = "payment_type")
     private Integer paymentType;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "point_id")
+    private SettlementPoint pointId;
 }

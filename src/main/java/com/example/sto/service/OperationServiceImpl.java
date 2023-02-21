@@ -1,6 +1,7 @@
 package com.example.sto.service;
 
 import com.example.sto.model.Operation;
+import com.example.sto.model.SettlementPoint;
 import com.example.sto.repository.OperationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,6 @@ public class OperationServiceImpl implements OperationService {
 
     @Override
     public Operation save(Operation operation) {
-        operation.setDate(new Date());
         return operationRepository.save(operation);
     }
 

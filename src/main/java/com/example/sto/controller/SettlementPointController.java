@@ -45,8 +45,10 @@ public class SettlementPointController {
 //    }
 
     @PostMapping(value = "/add")
-    public SettlementPoint saveSettlementPoint(@RequestBody SettlementPoint settlementPoint) {
-        settlementPoint.getOperation().setDate(new Date());
+    public SettlementPoint saveSettlementPoint(@RequestBody SettlementPoint settlementPoint, PointAddress pointAddress, Operation operation) {
+        operation.setDate(new Date());
+        pointAddressService.save(pointAddress);
+        operationService.save(operation);
         return settlementPointService.save(settlementPoint);
     }
 

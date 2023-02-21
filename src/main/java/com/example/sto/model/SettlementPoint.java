@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.Collection;
+import java.util.List;
+
 
 @Entity
 @Table(name = "settlement_point")
@@ -43,8 +46,10 @@ public class SettlementPoint {
     @OneToOne(cascade = CascadeType.ALL)
     private PointAddress pointAddress;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Operation operation;
+    @OneToMany(mappedBy = "pointId", fetch = FetchType.EAGER)
+    private List<Operation> operations;
 
+//    @OneToOne(cascade = CascadeType.ALL)
+//    private Operation operation;
 
 }
