@@ -1,5 +1,7 @@
 package com.example.sto.service;
 
+import com.example.sto.dto.PointAddressDTO;
+import com.example.sto.dto.SettlementPointDTO;
 import com.example.sto.model.SettlementPoint;
 
 import java.util.List;
@@ -10,7 +12,7 @@ public interface SettlementPointService {
     Optional<SettlementPoint> getById(String id);
 
     //add
-    SettlementPoint save(SettlementPoint settlementPoint);
+    SettlementPoint save(SettlementPointDTO settlementPointDTO);
 
     //update
     void update(SettlementPoint settlementPoint);

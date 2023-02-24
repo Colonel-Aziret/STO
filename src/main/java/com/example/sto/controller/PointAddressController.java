@@ -1,5 +1,6 @@
 package com.example.sto.controller;
 
+import com.example.sto.dto.PointAddressDTO;
 import com.example.sto.model.Operation;
 import com.example.sto.model.PointAddress;
 import com.example.sto.model.SettlementPoint;
@@ -7,6 +8,7 @@ import com.example.sto.repository.PointAddressRepository;
 import com.example.sto.service.PointAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +23,8 @@ public class PointAddressController {
     PointAddressService pointAddressService;
 
     @PostMapping(value = "/add")
-    public PointAddress savePointAddress(@RequestBody PointAddress pointAddress) {
-        return pointAddressService.save(pointAddress);
+    public ResponseEntity<PointAddress> savePointAddress(@RequestBody PointAddressDTO pointAddressDTO) {
+        return new ResponseEntity<>(pointAddressService.save(pointAddressDTO), HttpStatus.OK);
     }
 
     @PutMapping(value = "/update/{id}")

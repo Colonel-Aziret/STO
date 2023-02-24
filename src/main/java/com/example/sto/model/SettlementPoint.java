@@ -1,8 +1,7 @@
 package com.example.sto.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Collection;
@@ -11,12 +10,15 @@ import java.util.List;
 
 @Entity
 @Table(name = "settlement_point")
+@Builder
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class SettlementPoint {
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @GeneratedValue(strategy = GenerationType.UUID, generator = "point_id")
+//    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String pointId;
 
     @Column(name = "client_tin")
@@ -43,11 +45,12 @@ public class SettlementPoint {
     @Column(name = "equipment_id")
     private String equipmentId;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "point_address_id")
     private PointAddress pointAddress;
 
-    @OneToMany(mappedBy = "pointId", fetch = FetchType.EAGER)
-    private List<Operation> operations;
+//    @OneToMany(cascade = CascadeType.ALL)
+//    private List<Operation> operation;
 
 //    @OneToOne(cascade = CascadeType.ALL)
 //    private Operation operation;

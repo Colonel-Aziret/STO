@@ -1,11 +1,12 @@
 package com.example.sto.service;
 
+import com.example.sto.dto.PointAddressDTO;
 import com.example.sto.model.PointAddress;
 
 import java.util.List;
 
 public interface PointAddressService {
-    PointAddress save(PointAddress pointAddress);
+    PointAddress save(PointAddressDTO pointAddressDTO);
     //update
     void update(PointAddress pointAddress);
     //delete

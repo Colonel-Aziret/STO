@@ -1,15 +1,17 @@
 package com.example.sto.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Table(name = "point_address")
+@Builder
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class PointAddress {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "point_address_id")

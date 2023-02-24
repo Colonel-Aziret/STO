@@ -1,5 +1,7 @@
 package com.example.sto.controller;
 
+import com.example.sto.dto.PointAddressDTO;
+import com.example.sto.dto.SettlementPointDTO;
 import com.example.sto.model.Operation;
 import com.example.sto.model.PointAddress;
 import com.example.sto.model.SettlementPoint;
@@ -11,6 +13,7 @@ import com.example.sto.service.PointAddressService;
 import com.example.sto.service.SettlementPointService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,11 +48,9 @@ public class SettlementPointController {
 //    }
 
     @PostMapping(value = "/add")
-    public SettlementPoint saveSettlementPoint(@RequestBody SettlementPoint settlementPoint, PointAddress pointAddress, Operation operation) {
-        operation.setDate(new Date());
-        pointAddressService.save(pointAddress);
-        operationService.save(operation);
-        return settlementPointService.save(settlementPoint);
+    public ResponseEntity<SettlementPoint> saveSettlementPoint(@RequestBody SettlementPointDTO settlementPointDTO, PointAddressDTO pointAddressDTO) {
+        new ResponseEntity<>(pointAddressService.save(pointAddressDTO), HttpStatus.OK);
+        return new ResponseEntity<>(settlementPointService.save(settlementPointDTO), HttpStatus.OK);
     }
 
 
@@ -103,9 +104,9 @@ public class SettlementPointController {
 //        pointAddress.setLocation(pointAddressDetails.getLocation());
 //        Operation operation = new Operation();
 //        operation.setDate(new Date());
-        operationService.save(operation);
-        pointAddressService.save(pointAddress);
-        settlementPointService.save(settlementPoint);
+//        operationService.save(operation);
+//        pointAddressService.save(pointAddress);
+//        settlementPointService.save(settlementPoint);
         return ResponseEntity.ok().body(settlementPoint);
     }
 

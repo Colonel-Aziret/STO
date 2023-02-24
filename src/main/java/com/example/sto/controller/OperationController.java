@@ -1,13 +1,16 @@
 package com.example.sto.controller;
 
+import com.example.sto.dto.OperationDTO;
 import com.example.sto.model.Operation;
 import com.example.sto.model.PointAddress;
 import com.example.sto.model.SettlementPoint;
 import com.example.sto.repository.OperationRepository;
 import com.example.sto.repository.SettlementPointRepository;
 import com.example.sto.service.OperationService;
+import com.example.sto.service.SettlementPointService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,9 +30,14 @@ public class OperationController {
     @Autowired
     SettlementPointRepository settlementPointRepository;
 
+    @Autowired
+    SettlementPointService settlementPointService;
+
     @PostMapping(value = "/operations")
-    public Operation save(@RequestBody Operation operation) {
-        return operationService.save(operation);
+    public ResponseEntity<Operation> save(@RequestBody OperationDTO operationDTO) {
+//        settlementPointService.save(settlementPoint);
+//        operationRepository.saveAll(settlementPoint.getOperations());
+        return new ResponseEntity<>(operationService.save(operationDTO), HttpStatus.OK);
     }
 
     @PutMapping(value = "/operations/update/{id}")

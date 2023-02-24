@@ -1,16 +1,19 @@
 package com.example.sto.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "operations")
+@Builder
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Operation {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "operation_id")
@@ -48,7 +51,7 @@ public class Operation {
     @Column(name = "payment_type")
     private Integer paymentType;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "point_id")
     private SettlementPoint pointId;
 }

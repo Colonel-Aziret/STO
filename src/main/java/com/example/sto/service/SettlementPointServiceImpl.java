@@ -1,9 +1,13 @@
 package com.example.sto.service;
 
+import com.example.sto.dto.PointAddressDTO;
+import com.example.sto.dto.SettlementPointDTO;
 import com.example.sto.model.Operation;
 import com.example.sto.model.SettlementPoint;
 import com.example.sto.repository.OperationRepository;
+import com.example.sto.repository.PointAddressRepository;
 import com.example.sto.repository.SettlementPointRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +16,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class SettlementPointServiceImpl implements SettlementPointService {
 
     @Autowired
     SettlementPointRepository settlementPointRepository;
+    @Autowired
+    PointAddressRepository pointAddressRepository;
+    @Autowired
+    PointAddressService pointAddressService;
     @Autowired
     private OperationRepository operationRepository;
 
@@ -26,8 +35,17 @@ public class SettlementPointServiceImpl implements SettlementPointService {
 
 
     @Override
-    public SettlementPoint save(SettlementPoint settlementPoint) {
-        return settlementPointRepository.save(settlementPoint);
+    public SettlementPoint save(SettlementPointDTO settlementPointDTO) {
+        return settlementPointRepository.save(SettlementPoint.builder()
+                .clientTin(settlementPointDTO.getClientTin())
+                .clientName(settlementPointDTO.getClientName())
+                .activity(settlementPointDTO.getActivity())
+                .objectType(settlementPointDTO.getObjectType())
+                .pointType(settlementPointDTO.getPointType())
+                .pointFormat(settlementPointDTO.getPointFormat())
+                .equipmentType(settlementPointDTO.getEquipmentType())
+                .equipmentId(settlementPointDTO.getEquipmentId())
+                .pointAddress(settlementPointDTO.getPointAddress()).build());
     }
 
 
