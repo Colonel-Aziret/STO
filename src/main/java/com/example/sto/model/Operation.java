@@ -2,10 +2,8 @@ package com.example.sto.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "operations")
@@ -51,7 +49,7 @@ public class Operation {
     @Column(name = "payment_type")
     private Integer paymentType;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "point_id")
-    private SettlementPoint pointId;
+    private SettlementPoint settlementPoint;
 }

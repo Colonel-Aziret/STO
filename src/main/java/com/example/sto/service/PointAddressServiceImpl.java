@@ -19,7 +19,7 @@ public class PointAddressServiceImpl implements PointAddressService {
     @Autowired
     PointAddressRepository pointAddressRepository;
     @Autowired
-    private OperationRepository operationRepository;
+    OperationRepository operationRepository;
 
     @Override
     public PointAddress save(PointAddressDTO pointAddressDTO) {

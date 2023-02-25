@@ -12,7 +12,8 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-public class OperationDTO {
+public class OperationDTO extends SettlementPointDTO{
+    SettlementPointDTO settlementPointDTO = new SettlementPointDTO();
     private Date date;
 
     private Double sum;
@@ -31,6 +32,9 @@ public class OperationDTO {
 
     private Integer paymentType;
 
-    private SettlementPoint pointId;
+    private String pointId;
+
+//    private SettlementPoint settlementPoint;
+
 
 }

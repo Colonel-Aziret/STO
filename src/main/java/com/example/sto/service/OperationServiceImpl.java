@@ -5,6 +5,7 @@ import com.example.sto.dto.SettlementPointDTO;
 import com.example.sto.model.Operation;
 import com.example.sto.model.SettlementPoint;
 import com.example.sto.repository.OperationRepository;
+import com.example.sto.repository.SettlementPointRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,10 +22,14 @@ public class OperationServiceImpl implements OperationService {
     @Autowired
     OperationRepository operationRepository;
 
+    @Autowired
+    SettlementPointRepository settlementPointRepository;
+
+    @Autowired
+    SettlementPointService settlementPointService;
+
     @Override
     public Operation save(OperationDTO operationDTO) {
-        List<OperationDTO> operations = new ArrayList<>();
-        operations.add(operationDTO);
         return operationRepository.save(Operation.builder()
                 .date(new Date())
                 .sum(operationDTO.getSum())
@@ -35,6 +40,8 @@ public class OperationServiceImpl implements OperationService {
                 .nonresidentName(operationDTO.getNonresidentName())
                 .paymentDetails(operationDTO.getPaymentDetails())
                 .paymentType(operationDTO.getPaymentType()).build());
+//                .settlementPoint(operationDTO.getPointId()).build());
+//              .pointId(operationDTO.setPointId(operationDTO.getPointId())).build());
     }
 
 

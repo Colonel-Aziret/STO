@@ -1,5 +1,6 @@
 package com.example.sto.service;
 
+import com.example.sto.dto.OperationDTO;
 import com.example.sto.dto.PointAddressDTO;
 import com.example.sto.dto.SettlementPointDTO;
 import com.example.sto.model.Operation;
@@ -26,7 +27,7 @@ public class SettlementPointServiceImpl implements SettlementPointService {
     @Autowired
     PointAddressService pointAddressService;
     @Autowired
-    private OperationRepository operationRepository;
+    OperationRepository operationRepository;
 
     @Override
     public Optional<SettlementPoint> getById(String id) {
