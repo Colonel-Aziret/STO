@@ -1,6 +1,7 @@
 package com.example.sto.controller;
 
 import com.example.sto.dto.OperationDTO;
+import com.example.sto.dto.SettlementPointDTO;
 import com.example.sto.model.Operation;
 import com.example.sto.model.PointAddress;
 import com.example.sto.model.SettlementPoint;
@@ -13,8 +14,10 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.service.annotation.GetExchange;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -34,9 +37,11 @@ public class OperationController {
     SettlementPointService settlementPointService;
 
     @PostMapping(value = "/operations")
-    public ResponseEntity<Operation> save(@RequestBody OperationDTO operationDTO) {
+    public ResponseEntity<Operation> save(@RequestBody OperationDTO operationDTO, SettlementPoint settlementPoint) {
 //        settlementPointService.save(settlementPoint);
 //        operationRepository.saveAll(settlementPoint.getOperations());
+//        operationRepository.saveAll(settlementPointDTO.getOperations());
+        operationService.save(operationDTO);
         return new ResponseEntity<>(operationService.save(operationDTO), HttpStatus.OK);
     }
 
@@ -60,5 +65,10 @@ public class OperationController {
     public ResponseEntity<Integer> deleteOperation(@PathVariable(value = "id") Integer id) {
         this.operationRepository.deleteById(id);
         return ResponseEntity.ok().body(id);
+    }
+
+    @GetMapping("/operations/list")
+    public List<Operation> getAll() {
+        return operationRepository.findAll();
     }
 }

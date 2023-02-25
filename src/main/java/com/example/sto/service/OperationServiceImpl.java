@@ -39,7 +39,8 @@ public class OperationServiceImpl implements OperationService {
                 .supplierName(operationDTO.getSupplierName())
                 .nonresidentName(operationDTO.getNonresidentName())
                 .paymentDetails(operationDTO.getPaymentDetails())
-                .paymentType(operationDTO.getPaymentType()).build());
+                .paymentType(operationDTO.getPaymentType())
+                        .settlementPoint(operationDTO.getSettlementPoint()).build());
 //                .settlementPoint(operationDTO.getPointId()).build());
 //              .pointId(operationDTO.setPointId(operationDTO.getPointId())).build());
     }

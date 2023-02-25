@@ -49,7 +49,8 @@ public class Operation {
     @Column(name = "payment_type")
     private Integer paymentType;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "point_id")
     private SettlementPoint settlementPoint;
+
 }

@@ -117,7 +117,7 @@ public class SettlementPointController {
         return ResponseEntity.ok().body(pointId);
     }
 
-    @GetMapping("/list/{pointId}")
+    @GetMapping("/find/{pointId}")
     public ResponseEntity<SettlementPoint> getAllSettlementPointsByID(@PathVariable(value = "pointId") String pointId) throws ResourceNotFoundException {
         SettlementPoint settlementPoint = settlementPointRepository.findById(pointId).orElseThrow(() -> new ResourceNotFoundException("SettlementPoint not found for this id :: " + pointId));
         return ResponseEntity.ok().body(settlementPoint);

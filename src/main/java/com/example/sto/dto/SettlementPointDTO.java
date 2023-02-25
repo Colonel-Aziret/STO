@@ -1,7 +1,10 @@
 package com.example.sto.dto;
 
+import com.example.sto.model.Operation;
 import com.example.sto.model.PointAddress;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class SettlementPointDTO {
@@ -22,4 +25,6 @@ public class SettlementPointDTO {
     private String equipmentId;
 
     private PointAddress pointAddress;
+
+    private List<Operation> operations;
 }

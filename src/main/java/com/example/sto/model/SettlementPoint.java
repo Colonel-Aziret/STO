@@ -49,6 +49,9 @@ public class SettlementPoint {
     @JoinColumn(name = "point_address_id")
     private PointAddress pointAddress;
 
+    @OneToMany(mappedBy = "settlementPoint", cascade = CascadeType.ALL)
+    private List<Operation> operations;
+
 //    @OneToMany(cascade = CascadeType.ALL)
 //    private List<Operation> operation;
 
