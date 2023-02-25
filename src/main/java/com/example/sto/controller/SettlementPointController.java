@@ -49,7 +49,6 @@ public class SettlementPointController {
 
     @PostMapping(value = "/add")
     public ResponseEntity<SettlementPoint> saveSettlementPoint(@RequestBody SettlementPointDTO settlementPointDTO, PointAddressDTO pointAddressDTO) {
-        new ResponseEntity<>(pointAddressService.save(pointAddressDTO), HttpStatus.OK);
         return new ResponseEntity<>(settlementPointService.save(settlementPointDTO), HttpStatus.OK);
     }
 
@@ -114,7 +113,7 @@ public class SettlementPointController {
     @DeleteMapping("/delete/{pointId}")
     public ResponseEntity<String> deleteSettlementPoint(@PathVariable(value = "pointId") String pointId) {
         this.settlementPointRepository.deleteById(pointId);
-        return ResponseEntity.ok().body(pointId);
+        return ResponseEntity.ok().body("Удалена точка рассчета с таким pointId: " + pointId);
     }
 
     @GetMapping("/find/{pointId}")

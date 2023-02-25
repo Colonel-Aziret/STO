@@ -15,6 +15,7 @@ import java.util.List;
 public class PointAddress {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "point_address_id")
+    @SequenceGenerator(name = "point_address_id", sequenceName = "point_address_id", allocationSize = 1)
     private Integer id;
 
     @Column(name = "postal_code")

@@ -50,7 +50,6 @@ public class SettlementPointServiceImpl implements SettlementPointService {
     }
 
 
-
     public List<String> allSettlementPoint() {
         List<SettlementPoint> pointId = settlementPointRepository.findAll();
         return allSettlementPoint();
@@ -75,7 +74,6 @@ public class SettlementPointServiceImpl implements SettlementPointService {
     public List<SettlementPoint> getAll() {
         return settlementPointRepository.findAll();
     }
-
 
 
 }

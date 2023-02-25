@@ -15,6 +15,7 @@ import java.util.Date;
 public class Operation {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "operation_id")
+    @SequenceGenerator(name = "operation_id", sequenceName = "operation_id", allocationSize = 1)
     private Integer id;
 
 //    @Id

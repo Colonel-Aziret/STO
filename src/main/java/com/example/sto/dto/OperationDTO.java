@@ -13,7 +13,6 @@ import java.util.List;
 
 @Data
 public class OperationDTO {
-    SettlementPointDTO settlementPointDTO = new SettlementPointDTO();
     private Date date;
 
     private Double sum;
